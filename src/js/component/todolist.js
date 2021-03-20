@@ -3,19 +3,18 @@ import React, { useState } from "react";
 export function Todolist() {
 	//const {[nombre variable, funcion que modifica la variable ] = useState (valor inicial de la variable)
 	// [variable, función]
-	const [taskList, setTaskList] = useState("");
+	const [task, setTask] = useState("");
 	const [list, setList] = useState([]);
 
 	// En las Function se usa el 'handle'para nombrar los eventos (buenas prácticas)
-	// Luego del onChange sigue el guardar el taskList en la lista
+	// Luego del onChange sigue el guardar el task en la lista
 	// Press ENTER: key Code = 13
 	const handleAddTask = event => {
 		if (event.keyCode == 13 && list !== "") {
-			console.log("prueba");
 			//para que no agregue campos en blanco
 			let tempList = list;
-			setList([...tempList, taskList]);
-			setTaskList("");
+			setList([...tempList, task]);
+			setTask("");
 		}
 	};
 
@@ -24,7 +23,7 @@ export function Todolist() {
 	// const handleDeletetaskList: (index: any) => void
 	const handleDeleteTask = index => {
 		list.splice(index, 1);
-		setTaskList([...list]);
+		setTask([...list]);
 	};
 
 	return (
@@ -33,16 +32,16 @@ export function Todolist() {
 			<div className="list-container">
 				<input
 					type="text"
-					onChange={event => setTaskList(event.target.value)} //evento se activa cuando cambia el valor
-					value={taskList}
+					onChange={event => setTask(event.target.value)} //evento se activa cuando cambia el valor
+					value={task}
 					onKeyUp={handleAddTask}
 					placeholder="Add your new Super Task"
 				/>
 
 				<ul>
-					{list.map((taskList, index) => (
+					{list.map((task, index) => (
 						<li key={index}>
-							{taskList}
+							{task}
 							<span onClick={() => handleDeleteTask(index)}>
 								<i className="fas fa-times"></i>
 							</span>
